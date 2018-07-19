@@ -13,20 +13,20 @@ import java.util.Objects;
  */
 public class Vertex {
     
-    private Object vertex;
+    private Object conteudo;
     private HashSet adjacencia;
     
     public Vertex(Object obj){
-        this.vertex = obj;
+        this.conteudo = obj;
         this.adjacencia = new HashSet();
     }
 
-    public Object getVertex() {
-        return vertex;
+    public Object getConteudo() {
+        return conteudo;
     }
 
-    public void setVertex(Object vertex) {
-        this.vertex = vertex;
+    public void setConteudo(Object conteudo) {
+        this.conteudo = conteudo;
     }
 
     public HashSet getAdjacencia() {
@@ -40,7 +40,7 @@ public class Vertex {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 61 * hash + Objects.hashCode(this.vertex);
+        hash = 61 * hash + Objects.hashCode(this.conteudo);
         return hash;
     }
 
@@ -48,7 +48,7 @@ public class Vertex {
     public boolean equals(Object obj) {
         if(obj instanceof Vertex){
             Vertex outra = (Vertex) obj;
-            if(this.vertex.equals(outra.getVertex())){
+            if(this.conteudo.equals(outra.getConteudo())){
                 return true;
             }
         }

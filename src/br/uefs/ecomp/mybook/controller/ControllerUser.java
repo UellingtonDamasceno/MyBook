@@ -1,5 +1,7 @@
 package br.uefs.ecomp.mybook.controller;
 
+import br.uefs.ecomp.mybook.exeptions.AtributoVazioException;
+import br.uefs.ecomp.mybook.exeptions.DadoRepetidoException;
 import br.uefs.ecomp.mybook.model.User;
 import java.util.LinkedList;
 import javafx.collections.FXCollections;
@@ -22,11 +24,11 @@ public class ControllerUser {
         return listaAmigos;
     }
 
-    public void addAmigo(User novoAmigo) throws DadoRepetidoExcepetion {
+    public void addAmigo(User novoAmigo) throws DadoRepetidoException {
         if (novoAmigo == null) {
             throw new IllegalArgumentException();
         } else if (listaAmigos.contains(novoAmigo)) {
-            throw new DadoRepetidoExcepetion();
+            throw new DadoRepetidoException();
         } else {
             listaAmigos.add(novoAmigo);
         }

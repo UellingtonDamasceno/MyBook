@@ -65,24 +65,25 @@ public class Grafo {
     }
 
     public void removeVertex(Object chave) throws EntryNaoExisteException, HashVaziaException {
-        Vertex suporte = new Vertex(chave);
-        Vertex procurada = (Vertex) vertex.getElement(suporte);
-        HashSet vertexAdjecencia = procurada.getAdjacencia();
+        Vertex vertexOrigemRemover = new Vertex(chave);
+        Vertex vertexRemover = (Vertex) vertex.getElement(vertexOrigemRemover);
+        HashSet vertexAdjecencia = vertexRemover.getAdjacencia();
         Entry[] entries = vertexAdjecencia.getChaves();
 
         for (int i = 0; i < vertexAdjecencia.getTamanho(); i++) {
             if (entries[i] == null) {
             } else if (entries[i].getChave() == null && entries[i].getValor() == null) {
-            } else {
+            } else {//Remove todas as adjacencias da vertice a ser removida. 
                 Vertex vertexAtual = (Vertex) entries[i].getChave();
                 HashSet mapaAdjecencia = vertexAtual.getAdjacencia();
 
-                Aresta bordaRemovida = this.getBordas(suporte, vertexAtual);
+                Aresta bordaRemovida = this.getBordas(vertexOrigemRemover, vertexAtual);
                 arestas.remove(bordaRemovida);
 
-                mapaAdjecencia.remove(procurada);
+                mapaAdjecencia.remove(vertexRemover);
             }
         }
+        numVertex--;
     }
 
     private Aresta getBordas(Vertex vertexA, Vertex vertexB) throws EntryNaoExisteException {
@@ -125,7 +126,7 @@ public class Grafo {
     }
     
     public Object getChave(Object chave) throws EntryNaoExisteException {
-        return ((Vertex) this.getOneVertex(chave)).getVertex();
+        return ((Vertex) this.getOneVertex(chave)).getConteudo();
     }
 
     private Vertex getOneVertex(Object chave) throws EntryNaoExisteException {

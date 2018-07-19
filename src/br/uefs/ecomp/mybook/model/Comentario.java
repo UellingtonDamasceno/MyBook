@@ -1,7 +1,5 @@
 package br.uefs.ecomp.mybook.model;
 
-import java.util.Date;
-
 /**
  *
  * @author Uellington Damasceno
@@ -9,9 +7,9 @@ import java.util.Date;
 public class Comentario {
     private User autor;
     private String comentario;
-    private Date data;
+    private String data;
    
-    public Comentario(User autor, String comentario, Date data){
+    public Comentario(User autor, String comentario, String data){
         this.autor = autor;
         this.comentario = comentario;
         this.data = data;
@@ -33,11 +31,11 @@ public class Comentario {
         this.comentario = comentario;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uefs.ecomp.mybook.view;
 
 import br.uefs.ecomp.mybook.controller.ControllerArquivos;
@@ -31,14 +26,13 @@ public class MyBook extends Application {
         ca.escreveObjeto("", "Users.txt", users);
        
         try {
-            users = ca.lerTodosArquivosDiretorio("", ".txt");
+            users = (LinkedList) ca.lerTodosArquivosDiretorio("", ".txt");
             System.out.println(users);
         } catch (ListaConteudoVazia ex) {
             System.out.println("Lista Vazia");
         }
         
         System.exit(0);
-        
     }
 
     /**

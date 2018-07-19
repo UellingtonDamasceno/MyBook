@@ -1,4 +1,4 @@
-package br.uefs.ecomp.mybook.controller;
+package br.uefs.ecomp.mybook.exeptions;
 
 /**
  *

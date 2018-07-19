@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uefs.ecomp.mybook.util;
 
 import java.util.Objects;
@@ -16,9 +11,13 @@ public class Aresta {
     private final Vertex B;
     private int pesoAfinidade;
     
-    public Aresta(Vertex a, Vertex b, int distancia){
+    public Aresta(Vertex a, Vertex b){
         A = a;
         B = b;
+    }
+    
+    public Aresta(Vertex a, Vertex b, int distancia){
+        this(a, b);
         this.pesoAfinidade = distancia;
     }
     
@@ -33,10 +32,11 @@ public class Aresta {
     public int getPesoAfinidade() {
         return pesoAfinidade;
     }
-    
-    public void addPesoAfinidade(){
-        pesoAfinidade++;
+        
+    public void atualizaAfinidade(int valor){
+        pesoAfinidade += valor;
     }
+    
     @Override
     public boolean equals(Object o){
         if(o instanceof Aresta){

@@ -1,5 +1,6 @@
 package br.uefs.ecomp.mybook.controller;
 
+import br.uefs.ecomp.mybook.exeptions.AmizadeJaExisteException;
 import br.uefs.ecomp.mybook.exeptions.UserJaExisteExceptions;
 import br.uefs.ecomp.mybook.exeptions.EntryNaoExisteException;
 import br.uefs.ecomp.mybook.exeptions.HashVaziaException;
@@ -8,11 +9,10 @@ import br.uefs.ecomp.mybook.exeptions.VertexNaoExisteException;
 import br.uefs.ecomp.mybook.model.*;
 import br.uefs.ecomp.mybook.util.Aresta;
 import br.uefs.ecomp.mybook.util.Grafo;
+import br.uefs.ecomp.mybook.util.HashSet;
 import br.uefs.ecomp.mybook.util.Vertex;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
 
 /**
  *
@@ -21,7 +21,7 @@ import java.util.Map;
 public class ControllerGrafo {
 
     Grafo redeSocial;
-    Map<Vertex, Map<Vertex, Aresta>> rede = new HashMap<>();
+    //Map<Vertex, Map<Vertex, Aresta>> rede = new HashMap<>();
 
     public ControllerGrafo() {
         redeSocial = new Grafo();
@@ -41,9 +41,7 @@ public class ControllerGrafo {
         return redeSocial;
     }
 
-    public Grafo removeAmigo(User amigoRemovido) throws EntryNaoExisteException, HashVaziaException {
-        Vertex vertexAremover = new Vertex(amigoRemovido);
-        
+    public Grafo removeAmigo(User amigoRemovido) throws EntryNaoExisteException, HashVaziaException {       
         redeSocial.removeVertex(amigoRemovido);
         return redeSocial;
     }
@@ -57,7 +55,23 @@ public class ControllerGrafo {
         return redeSocial;
     }
 
-    public LinkedList getListaAmigo(User user) throws HashVaziaException, EntryNaoExisteException {
+    public Grafo atualizarVinculoAmizade(User userPost, User userOn, int valor) throws EntryNaoExisteException{
+        Vertex a = new Vertex(userPost);
+        Vertex b = new Vertex(userOn);
+        ((Aresta)redeSocial.getArestas().get(new Aresta(a, b))).atualizaAfinidade(valor);
+        return redeSocial;
+    }
+    
+    public void validaAmizade(User a, User b) throws AmizadeJaExisteException{
+        Vertex vertexA = new Vertex(a);
+        Vertex vertexB = new Vertex(b);
+        Aresta vinculo = new Aresta(vertexA, vertexB);
+        if(redeSocial.getArestas().contem(vinculo)){
+            throw new AmizadeJaExisteException();
+        }
+    }
+    
+    public LinkedList<User> getListaAmigo(User user) throws HashVaziaException, EntryNaoExisteException {
         return ((Vertex) redeSocial.getVertex().get(user)).getAdjacencia().toList();
     }
 
@@ -67,5 +81,13 @@ public class ControllerGrafo {
 
     public Iterator caminhoMaisCurto(Object inicio) throws HashVaziaException, EntryNaoExisteException {
         return redeSocial.caminhoMaisCurto(inicio).iterator();
+    }
+
+    public LinkedList getCaminhoPostagemAmigos(User user) throws EntryNaoExisteException, HashVaziaException {
+        LinkedList<String> diretorioPostagem = new LinkedList();
+        for (User amigo : getListaAmigo(user)) {
+            diretorioPostagem.add(amigo.caminhoPostagem());
+        }
+        return diretorioPostagem;
     }
 }

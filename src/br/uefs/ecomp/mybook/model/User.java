@@ -125,4 +125,8 @@ public class User implements Serializable {
         return this.nome;
     }
 
+    public String getCaminhoSolicitacao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -1,5 +1,7 @@
 package br.uefs.ecomp.mybook.controller;
 
+import br.uefs.ecomp.mybook.exeptions.ArquivoInexistenteException;
+import br.uefs.ecomp.mybook.exeptions.ListaAmigosVaziaException;
 import br.uefs.ecomp.mybook.exeptions.ListaConteudoVazia;
 import br.uefs.ecomp.mybook.exeptions.ArquivoVazioException;
 import java.io.BufferedWriter;
@@ -15,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.Writer;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -27,9 +30,9 @@ public class ControllerArquivos {
     }
 
     public void escreveObjeto(String caminhoDiretorio, String nomeArquivo, Serializable objeto) throws FileNotFoundException, IOException {
-        String nome =  validaNomeArquivo(nomeArquivo);
+        String nome = validaNomeArquivo(nomeArquivo);
         String diretorio = criaDiretorio(caminhoDiretorio).getAbsolutePath();
-        
+
         File arquivoDestino = new File(diretorio + "\\" + nome);
         if (!arquivoDestino.exists()) {
             arquivoDestino.createNewFile();
@@ -79,13 +82,14 @@ public class ControllerArquivos {
         return diretorio.listFiles(filtro);
     }
 
-    public LinkedList lerTodosArquivosDiretorio(String caminhoDiretorio, String extensaoFiltro) throws ListaConteudoVazia {
+    public List lerTodosArquivosDiretorio(String caminhoDiretorio, String extensaoFiltro) throws ListaConteudoVazia {
         File[] arquivosDiretorio = this.pegarArquivos(caminhoDiretorio, extensaoFiltro);
         LinkedList listaConteudo = new LinkedList();
         for (File atual : arquivosDiretorio) {
             try {
                 listaConteudo.add(lerObjeto(atual));
-            } catch (IOException | ClassNotFoundException | ArquivoVazioException ex) { }
+            } catch (IOException | ClassNotFoundException | ArquivoVazioException ex) {
+            }
         }
         if (listaConteudo.isEmpty()) {
             throw new ListaConteudoVazia();
@@ -106,14 +110,42 @@ public class ControllerArquivos {
         }
         throw new ArquivoVazioException();
     }
-    
-    private String validaNomeArquivo(String nome){
+
+    private String validaNomeArquivo(String nome) {
         System.out.println(nome);
-        if(!nome.contains(".txt")){
-            nome+=".txt";
+        if (!nome.contains(".txt")) {
+            nome += ".txt";
         }
-        nome = nome.replaceAll("[^A-Za-z0-9áàâãçaéèêíìîóòôúçñÁÀÂÉÈÊÍÌÓÔÚÇÑ@.\\s ]", "");
+        nome = nome.replaceAll("[^A-Za-z0-9áàâãçaéèêíìîóòôúçñÁÀÂÉÈÊÍÌÓÔÚÇÑ.\\s ]", "");
         System.out.println(nome);
         return nome;
+    }
+
+    public boolean deletarArquivo(String caminho, String nomeArquivo) throws ArquivoInexistenteException {
+        File arquivoDeletado = new File(caminho + "\\" + nomeArquivo);
+        if (!arquivoDeletado.exists()) {
+            throw new ArquivoInexistenteException();
+        } else {
+            return arquivoDeletado.delete();
+        }
+    }
+
+    public int escreveVariosDiretorios(List<String> diretorios, String nomeArquivo, Object post) throws ListaAmigosVaziaException {
+        if (!diretorios.isEmpty()) {
+            int erros[] = new int[1];
+            diretorios.forEach((diretorio) -> {
+                File arquivoPost = new File(diretorio + "\\" + nomeArquivo);
+                if (!arquivoPost.exists()) {
+                    try {
+                        escreveObjeto(diretorio, nomeArquivo, (Serializable) post);
+                    } catch (IOException ex) {
+                        erros[0]++;
+                    }
+                }
+            });
+            return erros[0];
+        }else{
+            throw new ListaAmigosVaziaException();
+        }
     }
 }
