@@ -4,9 +4,9 @@ package br.uefs.ecomp.mybook.exeptions;
  *
  * @author Uellington Damasceno
  */
-public class ListaAmigosVaziaException extends Exception {
+public class ListaDiretorioVaziaException extends Exception {
 
-    public ListaAmigosVaziaException() {
+    public ListaDiretorioVaziaException() {
         super();
     }
     

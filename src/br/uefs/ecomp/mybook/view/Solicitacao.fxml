@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uefs.ecomp.mybook.controller.SolicitacaoViewController">
+   <children>
+      <ImageView fx:id="imgViewUser" fitHeight="100.0" fitWidth="80.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <image>
+            <Image url="@../imagens/user.png" />
+         </image></ImageView>
+      <Button fx:id="bntAceitarSolicitacao" layoutX="285.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#aceitarSolicitacao" prefHeight="27.0" prefWidth="120.0" text="Aceitar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="15.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/aceitarSolicitacao.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="bntRecusarSolicitacao" layoutX="285.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#recusarSolicitacao" prefHeight="41.0" prefWidth="120.0" text="Recusar" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/recusarSolicitacao.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Label fx:id="lblNomeAutor" layoutX="110.0" layoutY="20.0" onMouseClicked="#abrirPerfilUser" prefHeight="27.0" prefWidth="120.0" text="Autor solicitação" AnchorPane.topAnchor="20.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+      <Label layoutX="110.0" layoutY="50.0" prefHeight="20.0" prefWidth="120.0" text="Amigos em comum" AnchorPane.topAnchor="50.0" />
+   </children>
+</AnchorPane>

@@ -1,12 +1,13 @@
 package br.uefs.ecomp.mybook.util;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Uellington Damasceno
  */
-public class Aresta {
+public class Aresta implements Serializable{
     private final Vertex A;
     private final Vertex B;
     private int pesoAfinidade;
@@ -59,6 +60,7 @@ public class Aresta {
         return hash;
     }
     
+    @Override
     public String toString(){
         return (A.toString() + " " + this.getPesoAfinidade() + " " + B.toString());
     }

@@ -1,7 +1,6 @@
 package br.uefs.ecomp.mybook.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  *
@@ -99,7 +98,7 @@ public class User implements Serializable {
     }
     
     public String caminhoPostagem() {
-        return null;
+        return "profiles\\"+this.login+"\\postagens";
     }
 
     @Override
@@ -113,11 +112,10 @@ public class User implements Serializable {
         return false;
     }
 
+   
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.login);
-        return hash;
+        return login.hashCode();
     }
 
     @Override
@@ -126,7 +124,7 @@ public class User implements Serializable {
     }
 
     public String getCaminhoSolicitacao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "profiles\\"+this.login+"\\solicitacoes";
     }
 
 }

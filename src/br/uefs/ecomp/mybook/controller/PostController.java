@@ -21,11 +21,11 @@ import javafx.collections.ObservableList;
  *
  * @author Uellington Damasceno
  */
-public class ControllerPost {
+public class PostController {
 
     private ObservableList<Post> listaPost;
 
-    public ControllerPost() {
+    public PostController() {
         listaPost = FXCollections.observableList(new LinkedList());
     }
 

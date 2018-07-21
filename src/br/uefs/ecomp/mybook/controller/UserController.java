@@ -11,11 +11,11 @@ import javafx.collections.ObservableList;
  *
  * @author Uellington Damasceno
  */
-public class ControllerUser {
+public class UserController {
 
     private ObservableList<User> listaAmigos;
 
-    public ControllerUser() {
+    public UserController() {
         listaAmigos = FXCollections.observableList(new LinkedList());
     }
 

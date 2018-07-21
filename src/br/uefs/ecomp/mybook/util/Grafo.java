@@ -1,6 +1,7 @@
 package br.uefs.ecomp.mybook.util;
 
 import br.uefs.ecomp.mybook.exeptions.*;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
@@ -8,10 +9,10 @@ import java.util.PriorityQueue;
  *
  * @author Uellington Damasceno
  */
-public class Grafo {
+public class Grafo implements Serializable {
 
     private int numVertex;
-    private int numAresta;  
+    private int numAresta;
     private HashSet vertex;
     private HashSet arestas;
 
@@ -97,14 +98,12 @@ public class Grafo {
         throw new EntryNaoExisteException();
     }
 
-    public void addBorda(Object vertexA, Object vertexB, int pesoAfinidade) throws EntryNaoExisteException, LoopNaoPermitidoException, VertexNaoExisteException {
+    public Aresta addAresta(Object vertexA, Object vertexB, int pesoAfinidade) throws EntryNaoExisteException, LoopNaoPermitidoException, VertexNaoExisteException {
         Vertex aVertex = new Vertex(vertexA);
         Vertex bVertex = new Vertex(vertexB);
-        
         Vertex pVertex = (Vertex) vertex.getElement(aVertex);
         Vertex sVertex = (Vertex) vertex.getElement(bVertex);
-
-        Aresta novaBorda = new Aresta(pVertex, sVertex, pesoAfinidade);
+        Aresta novaAresta = new Aresta(pVertex, sVertex, pesoAfinidade);
 
         if (aVertex.equals(bVertex)) {
             throw new LoopNaoPermitidoException();
@@ -113,18 +112,18 @@ public class Grafo {
             throw new VertexNaoExisteException();
         }
         if (!pVertex.getAdjacencia().contem(sVertex)) {
-            pVertex.getAdjacencia().put(sVertex, novaBorda);
+            pVertex.getAdjacencia().put(sVertex, novaAresta);
         }
         if (!sVertex.getAdjacencia().contem(pVertex)) {
-            sVertex.getAdjacencia().put(pVertex, novaBorda);
+            sVertex.getAdjacencia().put(pVertex, novaAresta);
         }
 
-        if (!arestas.contem(novaBorda)) {
-            arestas.put(novaBorda, null);
+        if (!arestas.contem(novaAresta)) {
+            arestas.put(novaAresta, null);
         }
-
+        return novaAresta;
     }
-    
+
     public Object getChave(Object chave) throws EntryNaoExisteException {
         return ((Vertex) this.getOneVertex(chave)).getConteudo();
     }
@@ -172,9 +171,9 @@ public class Grafo {
         }
         return caminhoMaisCurto;
     }
-    
+
     public void imprme() {
-        System.out.println(this.getArestas());
+        //System.out.println(this.getArestas());
         System.out.println(this.getVertex());
     }
 }

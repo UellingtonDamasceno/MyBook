@@ -1,12 +1,13 @@
 package br.uefs.ecomp.mybook.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Uellington Damasceno
  */
-public class SolicitacaoAmizade {
+public class SolicitacaoAmizade implements Serializable{
 
     private final User remetente;
     private final User destinatario;
@@ -33,6 +34,14 @@ public class SolicitacaoAmizade {
     public Date getData() {
         return data;
     }
+    
+    public String enderecoRemetente(){
+        return "profiles\\"+remetente.getLogin()+"\\solicitacoes";
+    }
+    
+    public String enderecoDestinatario(){
+        return "profiles\\"+destinatario.getLogin()+"\\solicitacoes";
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -43,5 +52,9 @@ public class SolicitacaoAmizade {
             }
         }
         return false;
+    }
+    @Override
+    public String toString(){
+        return "de: "+remetente;
     }
 }

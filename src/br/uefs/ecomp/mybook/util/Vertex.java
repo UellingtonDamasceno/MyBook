@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uefs.ecomp.mybook.util;
 
-import java.util.Objects;
+import java.io.Serializable;
 
 /**
  *
  * @author Uellington Damasceno
  */
-public class Vertex {
+public class Vertex implements Serializable{
     
     private Object conteudo;
     private HashSet adjacencia;
@@ -39,9 +34,7 @@ public class Vertex {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 61 * hash + Objects.hashCode(this.conteudo);
-        return hash;
+        return conteudo.hashCode();
     }
 
     @Override
@@ -53,5 +46,10 @@ public class Vertex {
             }
         }
         return false;
+    }
+    
+    @Override
+    public String toString(){
+        return conteudo.toString();
     }
 }

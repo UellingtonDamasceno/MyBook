@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uefs.ecomp.mybook.controller.HomeViewController">
+   <top>
+      <AnchorPane prefHeight="100.0" prefWidth="922.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageViewLogo" fitHeight="50.0" fitWidth="180.0" layoutX="8.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="734.0" AnchorPane.topAnchor="39.0" />
+            <TextField layoutX="272.0" layoutY="52.0" prefHeight="25.0" prefWidth="312.0" />
+            <Button layoutX="598.0" layoutY="52.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="bntEditarImagem" mnemonicParsing="false" onAction="#EditarImagem" text="..." visible="false">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ImageView fx:id="imageViewUser" fitHeight="125.0" fitWidth="148.0" onDragEntered="#setVisibleBotaoEditar" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <VBox prefHeight="315.0" prefWidth="148.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Amigos">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Solicitações">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Editar Perfil">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Solicitações">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Logout">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+   </right>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="549.0" />
+        </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

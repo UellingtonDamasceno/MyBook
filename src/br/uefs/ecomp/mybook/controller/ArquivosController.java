@@ -1,7 +1,7 @@
 package br.uefs.ecomp.mybook.controller;
 
 import br.uefs.ecomp.mybook.exeptions.ArquivoInexistenteException;
-import br.uefs.ecomp.mybook.exeptions.ListaAmigosVaziaException;
+import br.uefs.ecomp.mybook.exeptions.ListaDiretorioVaziaException;
 import br.uefs.ecomp.mybook.exeptions.ListaConteudoVazia;
 import br.uefs.ecomp.mybook.exeptions.ArquivoVazioException;
 import java.io.BufferedWriter;
@@ -18,14 +18,17 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Uellington Damasceno
  */
-public class ControllerArquivos {
+public class ArquivosController {
 
-    public ControllerArquivos() {
+    public ArquivosController() {
 
     }
 
@@ -60,7 +63,7 @@ public class ControllerArquivos {
         throw new ArquivoVazioException();
     }
 
-    private File criaDiretorio(String nome) {
+    public File criaDiretorio(String nome) {
         File diretorio = new File(nome);
         if (!diretorio.exists()) {
             diretorio.mkdir();
@@ -112,25 +115,25 @@ public class ControllerArquivos {
     }
 
     private String validaNomeArquivo(String nome) {
-        System.out.println(nome);
         if (!nome.contains(".txt")) {
             nome += ".txt";
         }
         nome = nome.replaceAll("[^A-Za-z0-9áàâãçaéèêíìîóòôúçñÁÀÂÉÈÊÍÌÓÔÚÇÑ.\\s ]", "");
-        System.out.println(nome);
         return nome;
     }
 
     public boolean deletarArquivo(String caminho, String nomeArquivo) throws ArquivoInexistenteException {
-        File arquivoDeletado = new File(caminho + "\\" + nomeArquivo);
+        File arquivoDeletado = new File(caminho + "\\" + validaNomeArquivo(nomeArquivo));
+        System.out.println(arquivoDeletado.toString());
         if (!arquivoDeletado.exists()) {
             throw new ArquivoInexistenteException();
         } else {
+            System.out.println("Deletado com sucesso!!!");
             return arquivoDeletado.delete();
         }
     }
 
-    public int escreveVariosDiretorios(List<String> diretorios, String nomeArquivo, Object post) throws ListaAmigosVaziaException {
+    public int escreveVariosDiretorios(List<String> diretorios, String nomeArquivo, Object post) throws ListaDiretorioVaziaException {
         if (!diretorios.isEmpty()) {
             int erros[] = new int[1];
             diretorios.forEach((diretorio) -> {
@@ -144,8 +147,34 @@ public class ControllerArquivos {
                 }
             });
             return erros[0];
-        }else{
-            throw new ListaAmigosVaziaException();
+        } else {
+            throw new ListaDiretorioVaziaException();
         }
+    }
+
+    public int deletarVariosArquivos(List<String> diretorios, String nomeArquivo) throws ListaDiretorioVaziaException {
+        if (!diretorios.isEmpty()) {
+            int erros[] = new int[1];
+            diretorios.forEach((String diretorio) -> {
+                try {
+                    deletarArquivo(diretorio, nomeArquivo);
+                } catch (ArquivoInexistenteException ex) {
+                    erros[0]++;
+                }
+            });
+            return erros[0];
+        } else {
+            throw new ListaDiretorioVaziaException();
+        }
+    }
+    
+    public File criaArquivo(String caminho, String nomeArquivo) throws IOException{
+        File diretorio = criaDiretorio(caminho);
+        File arquivo = new File(diretorio.toString()+"\\"+validaNomeArquivo(nomeArquivo));
+        if(!arquivo.exists()){
+            arquivo.createNewFile();
+            
+        }
+        return arquivo;
     }
 }

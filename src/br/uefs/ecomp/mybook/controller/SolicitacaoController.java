@@ -12,12 +12,17 @@ import javafx.collections.ObservableList;
  *
  * @author Uellington Damasceno
  */
-public class ControllerSolicitacao {
+public class SolicitacaoController {
 
     private ObservableList<SolicitacaoAmizade> listaSolicitacoes;
 
-    public ControllerSolicitacao() {
+    public SolicitacaoController() {
         listaSolicitacoes = FXCollections.observableList(new LinkedList());
+    }
+
+    public ObservableList carregarSolicitacoes(LinkedList solicitacoes) {
+        listaSolicitacoes.addAll(solicitacoes);
+        return listaSolicitacoes;
     }
 
     public SolicitacaoAmizade validaSolicitacao(User remetente, User destinatario) throws DadoRepetidoException {
@@ -27,11 +32,6 @@ public class ControllerSolicitacao {
         } else {
             return nova;
         }
-    }
-
-    public ObservableList carregarSolicitacoes(LinkedList solicitacoes) {
-        listaSolicitacoes.addAll(solicitacoes);
-        return listaSolicitacoes;
     }
 
     public void apagarSolicitacao(SolicitacaoAmizade solicitacao) throws SolicitacaoInexistenteException {

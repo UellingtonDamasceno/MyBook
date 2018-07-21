@@ -1,10 +1,13 @@
 package br.uefs.ecomp.mybook.util;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  *
  * @author Uellington Damasceno
  */
-public class Entry {
+public class Entry implements Serializable{
 
     private Object chave;
     private Object valor;
@@ -47,7 +50,7 @@ public class Entry {
     @Override
     public int hashCode() {
         return chave.hashCode();
-    }
+    }  
     
     @Override
     public String toString(){

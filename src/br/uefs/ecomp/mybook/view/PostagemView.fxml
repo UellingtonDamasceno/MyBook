@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="450.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uefs.ecomp.mybook.controller.PostagemViewController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="440.0">
+         <children>
+            <ImageView fx:id="imgUserIcon" fitHeight="70.0" fitWidth="39.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../imagens/userDefault.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="61.0" layoutY="6.0" text="Postada por" />
+            <Label fx:id="lblAutorPost" layoutX="60.0" layoutY="28.0" prefHeight="17.0" prefWidth="66.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="220.0" layoutY="17.0" text="Postado em:" />
+            <Label fx:id="lblDataPost" layoutX="293.0" layoutY="17.0" prefHeight="17.0" prefWidth="99.0" />
+            <MenuBar fx:id="menuBarOpcoes" layoutX="380.0" layoutY="5.0" prefHeight="39.0" prefWidth="56.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+              <menus>
+                <Menu mnemonicParsing="false">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Compartilhar">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagens/compartilhar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                    <MenuItem fx:id="mItemEditar" mnemonicParsing="false" onAction="#EditarPost" text="Editar">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagens/icons8_Edit_96px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                        <MenuItem fx:id="mItemRemover" mnemonicParsing="false" onAction="#RemoverPost" text="Remover">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagens/deletePost.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                  </items>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/menuBarra25.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Menu>
+              </menus>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuBar>
+         </children>
+      </AnchorPane>
+      <BorderPane fx:id="localPostagem">
+         <top>
+            <Label fx:id="lblTituloPost" prefHeight="69.0" prefWidth="351.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+      <HBox prefHeight="35.0" prefWidth="450.0" spacing="20.0">
+         <children>
+            <Button fx:id="bntDeslike" mnemonicParsing="false" onAction="#DeslikePublicacao" prefHeight="25.0" prefWidth="140.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagens/deslike.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="bntLike" mnemonicParsing="false" onAction="#CurtirPublicacao" prefHeight="25.0" prefWidth="140.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagens/like.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="bntComentario" mnemonicParsing="false" onAction="#comentar" prefHeight="25.0" prefWidth="140.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagens/comentario.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets left="50.0" right="50.0" />
+         </padding>
+      </HBox>
+      <Pagination fx:id="pagComentario" pageCount="10" prefHeight="146.0" prefWidth="450.0" />
+   </children>
+</VBox>
