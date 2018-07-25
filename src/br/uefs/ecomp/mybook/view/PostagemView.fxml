@@ -20,19 +20,19 @@
                   <Image url="@../imagens/userDefault.png" />
                </image>
             </ImageView>
-            <Label layoutX="61.0" layoutY="6.0" text="Postada por" />
+            <Label layoutX="61.0" layoutY="6.0" text="Publicação feita por:" />
             <Label fx:id="lblAutorPost" layoutX="60.0" layoutY="28.0" prefHeight="17.0" prefWidth="66.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label layoutX="220.0" layoutY="17.0" text="Postado em:" />
-            <Label fx:id="lblDataPost" layoutX="293.0" layoutY="17.0" prefHeight="17.0" prefWidth="99.0" />
-            <MenuBar fx:id="menuBarOpcoes" layoutX="380.0" layoutY="5.0" prefHeight="39.0" prefWidth="56.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <Label layoutX="213.0" layoutY="17.0" text="Postado em:" />
+            <Label fx:id="lblDataPost" layoutX="279.0" layoutY="17.0" prefHeight="17.0" prefWidth="99.0" />
+            <MenuBar layoutX="379.0" layoutY="7.0" prefHeight="33.0" prefWidth="57.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="7.0">
               <menus>
                 <Menu mnemonicParsing="false">
                   <items>
-                        <MenuItem mnemonicParsing="false" text="Compartilhar">
+                        <MenuItem mnemonicParsing="false" onAction="#compartilharPost" text="Compartilhar">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -40,15 +40,15 @@
                                  </image>
                               </ImageView>
                            </graphic></MenuItem>
-                    <MenuItem fx:id="mItemEditar" mnemonicParsing="false" onAction="#EditarPost" text="Editar">
+                    <MenuItem mnemonicParsing="false" onAction="#EditarPost" text="Editar">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagens/icons8_Edit_96px.png" />
+                                    <Image url="@../imagens/editar.png" />
                                  </image>
                               </ImageView>
                            </graphic></MenuItem>
-                        <MenuItem fx:id="mItemRemover" mnemonicParsing="false" onAction="#RemoverPost" text="Remover">
+                        <MenuItem mnemonicParsing="false" onAction="#RemoverPost" text="Remover">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -74,12 +74,31 @@
       </AnchorPane>
       <BorderPane fx:id="localPostagem">
          <top>
-            <Label fx:id="lblTituloPost" prefHeight="69.0" prefWidth="351.0" BorderPane.alignment="CENTER" />
+            <Label fx:id="lblTituloPost" prefHeight="69.0" prefWidth="439.0" BorderPane.alignment="CENTER" />
          </top>
+         <center>
+            <Pane maxWidth="450.0" minHeight="10.0" prefHeight="10.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
-      <HBox prefHeight="35.0" prefWidth="450.0" spacing="20.0">
+      <HBox prefHeight="35.0" prefWidth="450.0" spacing="10.0">
          <children>
-            <Button fx:id="bntDeslike" mnemonicParsing="false" onAction="#DeslikePublicacao" prefHeight="25.0" prefWidth="140.0">
+            <HBox prefHeight="35.0" prefWidth="240.0">
+               <children>
+                  <VBox prefHeight="35.0" prefWidth="98.0">
+                     <children>
+                        <Label fx:id="lblLike" text="Likes: " />
+                        <Label fx:id="lblDeslikes" text="Deslikes: " />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="35.0" prefWidth="108.0">
+                     <children>
+                        <Label fx:id="lblComentarios" text="Comments:" />
+                        <Label fx:id="lblCompartilhamentos" text="Shares:" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#DeslikePublicacao" prefHeight="33.0" prefWidth="80.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -91,7 +110,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="bntLike" mnemonicParsing="false" onAction="#CurtirPublicacao" prefHeight="25.0" prefWidth="140.0">
+            <Button mnemonicParsing="false" onAction="#CurtirPublicacao" prefHeight="33.0" prefWidth="80.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -106,24 +125,45 @@
                   <Insets />
                </HBox.margin>
             </Button>
-            <Button fx:id="bntComentario" mnemonicParsing="false" onAction="#comentar" prefHeight="25.0" prefWidth="140.0">
+         </children>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="50.0" prefWidth="450.0" spacing="10.0">
+         <children>
+            <TextField fx:id="txtAreaComentario" prefHeight="35.0" prefWidth="370.0" promptText="Comente o que achou desta publicação!">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#EnviarComentario">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../imagens/comentario.png" />
+                        <Image url="@../imagens/enviarSolicitacao.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
             </Button>
          </children>
          <VBox.margin>
-            <Insets left="5.0" right="5.0" />
+            <Insets />
          </VBox.margin>
          <padding>
-            <Insets left="50.0" right="50.0" />
+            <Insets left="10.0" />
          </padding>
       </HBox>
       <Pagination fx:id="pagComentario" pageCount="10" prefHeight="146.0" prefWidth="450.0" />

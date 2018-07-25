@@ -53,6 +53,10 @@ public class Grafo implements Serializable {
         this.arestas = arestas;
     }
 
+    public boolean estaVazio(){
+        return vertex.estaVazio();
+    }
+    
     public void addVertex(Object chave) {
         Vertex novaVertex = new Vertex(chave);
         vertex.put(novaVertex, null);
@@ -172,8 +176,7 @@ public class Grafo implements Serializable {
         return caminhoMaisCurto;
     }
 
-    public void imprme() {
-        //System.out.println(this.getArestas());
+    public void imprime() {
         System.out.println(this.getVertex());
     }
 }

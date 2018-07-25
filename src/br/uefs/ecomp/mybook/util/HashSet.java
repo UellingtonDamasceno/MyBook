@@ -81,7 +81,6 @@ public class HashSet implements Serializable {
     public void put(Object chave, Object valor) {
         Entry entry = new Entry(chave, valor);
         int posicao = procuraPosicao(gerarHashCode(chave), entry);
-        System.out.println(chave + " :::POS::: "+ posicao + " :::TAM::: "+tamanho);
         if (isEmpty(posicao)) {
             chaves[posicao] = entry;
             tamanho++;
@@ -128,7 +127,6 @@ public class HashSet implements Serializable {
         int hashCode = gerarHashCode(chave);
         for (int i = hashCode; chaves[i] != null; i = (i + 1) % chaves.length) {
             Entry atual = chaves[i];
-            System.out.println(atual);
             if (atual == null) {
                 throw new EntryNaoExisteException();
             } else if (atual.equals(EMPTY)) {

@@ -8,59 +8,132 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uefs.ecomp.mybook.controller.HomeViewController">
+<BorderPane maxWidth="-Infinity" minHeight="620.0" minWidth="-Infinity" prefHeight="620.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uefs.ecomp.mybook.controller.HomeViewController">
    <top>
-      <AnchorPane prefHeight="100.0" prefWidth="922.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxWidth="922.0" minWidth="922.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageViewLogo" fitHeight="50.0" fitWidth="180.0" layoutX="8.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="734.0" AnchorPane.topAnchor="39.0" />
-            <TextField layoutX="272.0" layoutY="52.0" prefHeight="25.0" prefWidth="312.0" />
-            <Button layoutX="598.0" layoutY="52.0" mnemonicParsing="false" text="Button" />
+            <TextField fx:id="txtBarraBusca" layoutX="274.0" layoutY="48.0" prefHeight="32.0" prefWidth="312.0" />
+            <Button fx:id="bntBuscar" layoutX="598.0" layoutY="48.0" mnemonicParsing="false" onAction="#buscarUser">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagens/lupaBuscar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <HBox layoutX="14.0" layoutY="43.0" prefHeight="43.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
    </top>
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="150.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="160.0" prefWidth="150.0">
                <children>
-                  <Button fx:id="bntEditarImagem" mnemonicParsing="false" onAction="#EditarImagem" text="..." visible="false">
+                  <ImageView fx:id="imageViewUser" fitHeight="227.0" fitWidth="149.0" onDragEntered="#setVisibleBotaoEditar" pickOnBounds="true" preserveRatio="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button>
-                  <ImageView fx:id="imageViewUser" fitHeight="125.0" fitWidth="148.0" onDragEntered="#setVisibleBotaoEditar" pickOnBounds="true" preserveRatio="true">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
+                     <image>
+                        <Image url="@../imagens/userDefault.png" />
+                     </image>
                   </ImageView>
+                  <Button fx:id="bntEditarImagem" mnemonicParsing="false" onAction="#EditarImagem" visible="false">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/editarImagem.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </StackPane>
-            <VBox prefHeight="315.0" prefWidth="148.0" spacing="20.0">
+            <VBox prefHeight="315.0" prefWidth="148.0" spacing="5.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Amigos">
+                  <Button fx:id="bntFeed" mnemonicParsing="false" onAction="#verFeed" prefHeight="50.0" prefWidth="147.0" text="Feed">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-33.0">
+                           <image>
+                              <Image url="@../imagens/feed.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Solicitações">
+                  <Button fx:id="bntAmigos" mnemonicParsing="false" onAction="#verAmigos" prefHeight="50.0" prefWidth="147.0" text="Amigos">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-26.0">
+                           <image>
+                              <Image url="@../imagens/amigos.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Editar Perfil">
+                  <Button fx:id="bntMeuArquivos" mnemonicParsing="false" onAction="#verMeusArquivos" prefHeight="50.0" prefWidth="148.0" text="Meus arquivos">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-7.0">
+                           <image>
+                              <Image url="@../imagens/armazenamento.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Solicitações">
+                  <Button fx:id="bntEditarPerfil" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="50.0" prefWidth="148.0" text="Editar Perfil">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-16.0">
+                           <image>
+                              <Image url="@../imagens/editarPerfil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="148.0" text="Logout">
+                  <Button fx:id="bntSolicitacoes" mnemonicParsing="false" onAction="#verSolicitacoes" prefHeight="50.0" prefWidth="148.0" text="Solicitações">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-15.0">
+                           <image>
+                              <Image url="@../imagens/solicitacao.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="bntLogout" mnemonicParsing="false" onAction="#finalizarSessao" prefHeight="50.0" prefWidth="148.0" text="Logout">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="-25.0">
+                           <image>
+                              <Image url="@../imagens/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </VBox>
@@ -72,16 +145,25 @@
    </left>
    <right>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
       </ScrollPane>
    </right>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="549.0" />
-        </content>
+      <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <content>
+            <VBox fx:id="vBoxVisualizador" alignment="CENTER" maxWidth="525.0" minWidth="525.0" prefWidth="525.0" spacing="10.0" />
+         </content>
       </ScrollPane>
    </center>
 </BorderPane>

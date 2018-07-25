@@ -50,4 +50,13 @@ public class UserController {
         }
     }
 
+    public User validaUser(String login, String senha) throws AtributoVazioException {
+        User novoUser = new User(login, senha);
+        if(novoUser.ehValido()){
+            return novoUser;
+        }else{
+            throw new AtributoVazioException();
+        }
+    }
+
 }

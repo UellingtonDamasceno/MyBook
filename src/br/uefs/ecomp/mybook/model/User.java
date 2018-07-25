@@ -17,6 +17,10 @@ public class User implements Serializable {
     private String endereco;
     private String telefone;
 
+    public User(String login, String senha) {
+        this(login, senha, "0", "0", "0", "0", "0");
+    }
+
     public User(String login, String senha, String nome, String email,
             String dataN, String endereco, String telefone) {
         this.login = login;
@@ -93,12 +97,16 @@ public class User implements Serializable {
     }
 
     public boolean ehValido() {
-        return !(login.isEmpty() || senha.isEmpty() || nome.isEmpty() ||
-                email.isEmpty() || dataNascimento.isEmpty() || endereco.isEmpty());
+        return !(login.isEmpty() || senha.isEmpty() || nome.isEmpty()
+                || email.isEmpty() || dataNascimento.isEmpty() || endereco.isEmpty());
     }
-    
+
     public String caminhoPostagem() {
-        return "profiles\\"+this.login+"\\postagens";
+        return "profiles\\" + this.login + "\\postagens";
+    }
+
+    public String getCaminhoSolicitacao() {
+        return "profiles\\" + this.login + "\\solicitacoes";
     }
 
     @Override
@@ -112,7 +120,6 @@ public class User implements Serializable {
         return false;
     }
 
-   
     @Override
     public int hashCode() {
         return login.hashCode();
@@ -120,11 +127,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return this.nome;
+        return this.login;
     }
-
-    public String getCaminhoSolicitacao() {
-        return "profiles\\"+this.login+"\\solicitacoes";
-    }
-
 }

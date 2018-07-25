@@ -1,7 +1,6 @@
 package br.uefs.ecomp.mybook.util;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  *

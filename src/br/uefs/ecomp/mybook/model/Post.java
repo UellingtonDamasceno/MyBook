@@ -3,9 +3,6 @@ package br.uefs.ecomp.mybook.model;
 import br.uefs.ecomp.mybook.exeptions.ComentarioNaoEncontradoException;
 import br.uefs.ecomp.mybook.exeptions.AtributoVazioException;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +13,7 @@ import javafx.collections.ObservableList;
  */
 public class Post implements Serializable {
 
-    private final User autor;
+    private User autor;
     private String url;
     private String dataHora;
     private PostType tipoPost;
@@ -24,6 +21,7 @@ public class Post implements Serializable {
     private final ObservableList comentarios;
     private int like;
     private int deslike;
+    private int compartilhamentos;
 
     public Post(User autor, String url, String tituloCabecalho, PostType tipoPost, String dataHora) {
         this.autor = autor;
@@ -38,12 +36,24 @@ public class Post implements Serializable {
         return tipoPost;
     }
 
+    public String getTituloPost() {
+        return tituloCabecalho;
+    }
+
     public User getAutor() {
         return autor;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public void setAutor(User autor) {
+        this.autor = autor;
+    }
+
+    public void setData(String data) {
+        this.dataHora = data;
     }
 
     public void setUrl(String url) {
@@ -58,6 +68,10 @@ public class Post implements Serializable {
         return comentarios;
     }
 
+    public int getNumComentarios() {
+        return comentarios.size();
+    }
+
     public int getLike() {
         return like;
     }
@@ -66,12 +80,24 @@ public class Post implements Serializable {
         return deslike;
     }
 
+    public String getData() {
+        return dataHora;
+    }
+
+    public int getCompatilhamentos() {
+        return compartilhamentos;
+    }
+
     public void addLike() {
         like++;
     }
 
     public void addDeslike() {
         deslike++;
+    }
+
+    public void addCompartilhamento() {
+        compartilhamentos++;
     }
 
     public void limparComentarios() {
@@ -113,5 +139,4 @@ public class Post implements Serializable {
     public String toString() {
         return this.tituloCabecalho;
     }
-
 }

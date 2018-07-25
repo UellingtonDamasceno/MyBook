@@ -18,9 +18,6 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +32,6 @@ public class ArquivosController {
     public void escreveObjeto(String caminhoDiretorio, String nomeArquivo, Serializable objeto) throws FileNotFoundException, IOException {
         String nome = validaNomeArquivo(nomeArquivo);
         String diretorio = criaDiretorio(caminhoDiretorio).getAbsolutePath();
-
         File arquivoDestino = new File(diretorio + "\\" + nome);
         if (!arquivoDestino.exists()) {
             arquivoDestino.createNewFile();
@@ -49,7 +45,7 @@ public class ArquivosController {
     }
 
     public Object lerObjeto(String caminhoDiretorio, String nomeArquivo) throws IOException, ClassNotFoundException, ArquivoVazioException {
-        File arquivo = new File(criaDiretorio(caminhoDiretorio) + nomeArquivo);
+        File arquivo = new File(criaDiretorio(caminhoDiretorio) + "\\"+ validaNomeArquivo(nomeArquivo));
         if (!arquivo.exists()) {
             throw new IOException();
         }
@@ -91,8 +87,7 @@ public class ArquivosController {
         for (File atual : arquivosDiretorio) {
             try {
                 listaConteudo.add(lerObjeto(atual));
-            } catch (IOException | ClassNotFoundException | ArquivoVazioException ex) {
-            }
+            } catch (IOException | ClassNotFoundException | ArquivoVazioException ex) {}
         }
         if (listaConteudo.isEmpty()) {
             throw new ListaConteudoVazia();
@@ -124,7 +119,6 @@ public class ArquivosController {
 
     public boolean deletarArquivo(String caminho, String nomeArquivo) throws ArquivoInexistenteException {
         File arquivoDeletado = new File(caminho + "\\" + validaNomeArquivo(nomeArquivo));
-        System.out.println(arquivoDeletado.toString());
         if (!arquivoDeletado.exists()) {
             throw new ArquivoInexistenteException();
         } else {
