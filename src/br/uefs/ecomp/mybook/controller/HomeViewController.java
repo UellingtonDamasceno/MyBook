@@ -1,22 +1,23 @@
 package br.uefs.ecomp.mybook.controller;
 
-import br.uefs.ecomp.mybook.exeptions.ListaConteudoVazia;
+import br.uefs.ecomp.mybook.exeptions.ListaConteudoVaziaException;
 import br.uefs.ecomp.mybook.facade.FacadeBackEnd;
 import br.uefs.ecomp.mybook.facade.FacadeFrontEnd;
 import br.uefs.ecomp.mybook.model.Post;
 import br.uefs.ecomp.mybook.model.SolicitacaoAmizade;
+import br.uefs.ecomp.mybook.model.User;
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
@@ -33,26 +34,16 @@ public class HomeViewController implements Initializable {
     @FXML
     private ImageView imageViewUser;
     @FXML
-    private Button bntAmigos;
-    @FXML
-    private Button bntMeuArquivos;
-    @FXML
-    private Button bntEditarPerfil;
-    @FXML
-    private Button bntSolicitacoes;
-    @FXML
-    private Button bntLogout;
-    @FXML
     private Button bntBuscar;
     @FXML
     private TextField txtBarraBusca;
-    @FXML
-    private Button bntFeed;
     @FXML
     private VBox vBoxVisualizador;
 
     private FacadeBackEnd facade;
     private FacadeFrontEnd facadeFrontEnd;
+    @FXML
+    private Label lblNomeUser;
 
     /**
      * Initializes the controller class.
@@ -64,12 +55,6 @@ public class HomeViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         facade = FacadeBackEnd.getInstance();
         facadeFrontEnd = FacadeFrontEnd.getInstance();
-
-        try {
-            inserirPostagens(facade.carregarPost(facade.getUserOn()));
-        } catch (ListaConteudoVazia ex) {
-
-        }
     }
 
     @FXML
@@ -98,12 +83,17 @@ public class HomeViewController implements Initializable {
     private void verSolicitacoes(ActionEvent event) {
         try {
             inserirSolicitacao(facade.carregarSolicitacoesAmizade(facade.getUserOn()));
-        } catch (ListaConteudoVazia ex) {
+        } catch (ListaConteudoVaziaException ex) {
         }
     }
 
     @FXML
     private void finalizarSessao(ActionEvent event) {
+        try {
+            facadeFrontEnd.mudaCena(facadeFrontEnd.getLoginExistente());
+            facade.logout();
+        } catch (IOException ex) {
+        }
     }
 
     @FXML
@@ -138,4 +128,14 @@ public class HomeViewController implements Initializable {
         }
     }
 
+    public void injetarUser(User userOn) {
+        //imageViewUser.setImage(new Image(userOn.getCaminhoImagem()));
+        lblNomeUser.setText(userOn.getNome());
+        
+        try {
+            inserirPostagens(facade.carregarPost(userOn));
+        } catch (ListaConteudoVaziaException ex) {
+            System.out.println("Publicação vazia");
+        }
+    }
 }

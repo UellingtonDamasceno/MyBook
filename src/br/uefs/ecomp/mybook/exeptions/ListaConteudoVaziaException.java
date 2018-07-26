@@ -4,9 +4,9 @@ package br.uefs.ecomp.mybook.exeptions;
  *
  * @author Uellington Damasceno
  */
-public class ListaConteudoVazia extends Exception {
+public class ListaConteudoVaziaException extends Exception {
 
-    public ListaConteudoVazia() {
+    public ListaConteudoVaziaException() {
         super();
     }
     

@@ -5,7 +5,8 @@ import br.uefs.ecomp.mybook.facade.FacadeBackEnd;
 import br.uefs.ecomp.mybook.facade.FacadeFrontEnd;
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.scene.image.Image;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /**
@@ -18,21 +19,18 @@ public class MyBook extends Application {
     public void start(Stage primaryStage) throws IOException, ClassNotFoundException {
         FacadeBackEnd facadeBackEnd = FacadeBackEnd.getInstance();
         FacadeFrontEnd facadeFrontEnd = FacadeFrontEnd.getInstance();
-        
+
         facadeBackEnd.inicializar();
-        facadeFrontEnd.inicializa(primaryStage);
         
         try {
             facadeBackEnd.carregarGrafo();
         } catch (ArquivoVazioException ex) {
             System.out.println("Arquivo vazio!");
         }
-        
-        primaryStage.getIcons().add(new Image("/br/uefs/ecomp/mybook/imagens/book.png"));
-        primaryStage.setTitle("MyBook");
-        primaryStage.setResizable(false);
+
+        facadeFrontEnd.inicializa(primaryStage);
+        primaryStage.setScene(new Scene(facadeFrontEnd.getLoginExistente()));
         primaryStage.show();
-        //System.exit(0);
     }
 
     /**
@@ -42,5 +40,10 @@ public class MyBook extends Application {
         launch(args);
     }
 
-
+    private void criaAlerta(String titulo, String mensagem) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle(titulo);
+        a.setContentText(mensagem);
+        a.show();
+    }
 }

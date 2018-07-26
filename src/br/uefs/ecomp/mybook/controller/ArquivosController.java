@@ -2,7 +2,7 @@ package br.uefs.ecomp.mybook.controller;
 
 import br.uefs.ecomp.mybook.exeptions.ArquivoInexistenteException;
 import br.uefs.ecomp.mybook.exeptions.ListaDiretorioVaziaException;
-import br.uefs.ecomp.mybook.exeptions.ListaConteudoVazia;
+import br.uefs.ecomp.mybook.exeptions.ListaConteudoVaziaException;
 import br.uefs.ecomp.mybook.exeptions.ArquivoVazioException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -72,25 +72,25 @@ public class ArquivosController {
         clean.close();
     }
 
-    private File[] pegarArquivos(String caminhoDiretorio, final String extensaoFiltro) {
+    private File[] pegarArquivos(String caminhoDiretorio, final String extensaoFiltro) throws ListaConteudoVaziaException {
         File diretorio = (caminhoDiretorio.isEmpty()) ? new File("").getAbsoluteFile() : new File(caminhoDiretorio);
         FileFilter filtro = null;
         if (extensaoFiltro != null) {
             filtro = (File nomeDoCaminho) -> nomeDoCaminho.getAbsolutePath().endsWith(extensaoFiltro);
         }
+        if(diretorio.getTotalSpace() == 0){
+            throw new ListaConteudoVaziaException();
+        }
         return diretorio.listFiles(filtro);
     }
 
-    public List lerTodosArquivosDiretorio(String caminhoDiretorio, String extensaoFiltro) throws ListaConteudoVazia {
+    public List lerTodosArquivosDiretorio(String caminhoDiretorio, String extensaoFiltro) throws ListaConteudoVaziaException {
         File[] arquivosDiretorio = this.pegarArquivos(caminhoDiretorio, extensaoFiltro);
         LinkedList listaConteudo = new LinkedList();
         for (File atual : arquivosDiretorio) {
             try {
                 listaConteudo.add(lerObjeto(atual));
             } catch (IOException | ClassNotFoundException | ArquivoVazioException ex) {}
-        }
-        if (listaConteudo.isEmpty()) {
-            throw new ListaConteudoVazia();
         }
         return listaConteudo;
     }

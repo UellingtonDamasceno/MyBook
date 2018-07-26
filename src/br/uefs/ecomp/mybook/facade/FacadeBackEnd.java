@@ -58,31 +58,35 @@ public class FacadeBackEnd {
         controllerGrafo.carregarGrafo(redeSocial);
     }
 
-    public ObservableList carregarPost(User user) throws ListaConteudoVazia {
+    public ObservableList carregarPost(User user) throws ListaConteudoVaziaException {
         LinkedList<Post> postagens = (LinkedList) controllerArquivos.lerTodosArquivosDiretorio(user.caminhoPostagem(), ".txt");
         return controllerPostagem.carregarPost(postagens);
     }
 
-    public ObservableList carregaListaAmigos(User user) throws ListaConteudoVazia, HashVaziaException, EntryNaoExisteException {
+    public ObservableList carregaListaAmigos(User user) throws ListaConteudoVaziaException, HashVaziaException, EntryNaoExisteException {
         LinkedList<User> amigos = controllerGrafo.getListaAmigo(user);
         return controllerUser.carregaAmigos(amigos);
     }
 
-    public ObservableList carregarSolicitacoesAmizade(User user) throws ListaConteudoVazia {
+    public ObservableList carregarSolicitacoesAmizade(User user) throws ListaConteudoVaziaException {
         LinkedList<SolicitacaoAmizade> solicitacoes = (LinkedList) controllerArquivos.lerTodosArquivosDiretorio(user.getCaminhoSolicitacao(), ".txt");
         return controllerSolicitacao.carregarSolicitacoes(solicitacoes);
     }
 
     //**************************************/Ações relacionadas a sessão
-    public void login(String login, String senha) throws EntryNaoExisteException, EmailOuSenhaInvalidoException,
+    public User login(String login, String senha) throws EntryNaoExisteException, EmailOuSenhaInvalidoException,
                                                 AtributoVazioException, SemUsuariosCadastradosException {
-        
+
         User validado = controllerUser.validaUser(login, senha);
         User userOn = controllerGrafo.verificaCredenciais(validado);
         controllerSessao.setUserOn(userOn);
-    
+        return userOn;
     }
-
+    
+    public void logout() throws IOException{
+        controllerSessao.setUserOn(null);
+        controllerArquivos.escreveObjeto("resources", "grafo", controllerGrafo.redeSocial());
+    }
     //***************************************Ações relacionadas ao grafo
     public User addNovoUser(String login, String senha, String nome,
                             String email, String dataN, String endereco,
@@ -90,7 +94,6 @@ public class FacadeBackEnd {
                             IOException, UserJaExisteExceptions {
         
         User user = controllerUser.validaUser(login, senha, nome, email, dataN, endereco, telefone);
-        
         Grafo atualiza = controllerGrafo.addNovoUser(user);
     
         File diretorioPerfil = controllerArquivos.criaDiretorio("profiles\\" + user.getLogin());
@@ -212,4 +215,5 @@ public class FacadeBackEnd {
         controllerArquivos.escreveObjeto(destinatario.getCaminhoSolicitacao(), nova.toString(), (Serializable) nova);
         return nova;
     }
+    
 }
