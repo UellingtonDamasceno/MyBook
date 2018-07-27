@@ -31,12 +31,8 @@ public class FacadeFrontEnd {
         return (facadeFrontEnd == null) ? facadeFrontEnd = new FacadeFrontEnd() : facadeFrontEnd;
     }
 
-    public void inicializa(Stage palcoPrincipal) throws IOException {
+    public void inicializa(Stage palcoPrincipal) {
         palcoController = new PalcoController(palcoPrincipal);
-
-        FXMLLoader loader = palcoController.getLoaderFXML("view/LoginView.fxml");
-        login = loader.getController();
-        cenas.setCenaLogin(loader.load());
     }
 
     public Parent novoLogin(User userOn) throws IOException {
@@ -50,23 +46,24 @@ public class FacadeFrontEnd {
         return cenas.getCenaHome();
     }
     
-    public Parent getLoginExistente(){
+    public Parent getTelaLogin() throws IOException{
+        FXMLLoader loader = palcoController.getLoaderFXML("view/LoginView.fxml");
+        login = loader.getController();
+        cenas.setCenaLogin(loader.load());
         return cenas.getCenaLogin();
     }
-    
+ 
     public Parent getHomeExistente(){
         return cenas.getCenaHome();
     }
-        
-    public Parent carregarPost(Post post) throws IOException {
-        return palcoController.injetarConteudo(post);
-    }
-
-    public Parent carregarSolicitacao(SolicitacaoAmizade solicitacao) throws IOException {
+            
+    public Parent carregaConteudoInjetavel(Object solicitacao) throws IOException {
         return palcoController.injetarConteudo(solicitacao);
     }
 
     public void mudaCena(Parent conteudo) {
         palcoController.mudaCena(conteudo);
     }
+
+    
 }

@@ -13,7 +13,7 @@
       <AnchorPane maxWidth="922.0" minWidth="922.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txtBarraBusca" layoutX="274.0" layoutY="48.0" prefHeight="32.0" prefWidth="312.0" />
-            <Button fx:id="bntBuscar" layoutX="598.0" layoutY="48.0" mnemonicParsing="false" onAction="#buscarUser">
+            <Button layoutX="598.0" layoutY="48.0" mnemonicParsing="false" onAction="#buscarUser">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,9 +33,9 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane prefHeight="160.0" prefWidth="150.0">
+                  <StackPane fx:id="stackPaneImagemView" prefHeight="160.0" prefWidth="150.0">
                      <children>
-                        <ImageView fx:id="imageViewUser" fitHeight="227.0" fitWidth="149.0" onDragEntered="#setVisibleBotaoEditar" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewUser" fitHeight="227.0" fitWidth="149.0" onMouseEntered="#setVisibleButtonEditar" pickOnBounds="true" preserveRatio="true">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -43,7 +43,7 @@
                               <Image url="@../imagens/userDefault.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="bntEditarImagem" mnemonicParsing="false" onAction="#EditarImagem" visible="false">
+                        <Button fx:id="bntEditarImagem" mnemonicParsing="false" onAction="#EditarImagem" onMouseExited="#esconderButtonEditar" translateX="50.0" translateY="60.0" visible="false">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -60,7 +60,7 @@
                         </Button>
                      </children>
                   </StackPane>
-                  <Label fx:id="lblNomeUser" prefHeight="29.0" prefWidth="8.0" />
+                  <Label fx:id="lblNomeUser" prefHeight="28.0" prefWidth="170.0" />
                </children>
             </VBox>
             <VBox prefHeight="315.0" prefWidth="148.0" spacing="5.0">
@@ -149,13 +149,16 @@
       </VBox>
    </left>
    <right>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane hbarPolicy="NEVER" prefHeight="535.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
          <padding>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </padding>
+         <content>
+            <VBox fx:id="vboxBaseRecomendacoes" prefWidth="200.0" spacing="2.0" />
+         </content>
       </ScrollPane>
    </right>
    <center>

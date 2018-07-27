@@ -119,11 +119,13 @@ public class LoginViewController implements Initializable {
         String senha = txtSenhaCadastro.getText();
         String nome = txtNome.getText();
         String email = txtEmail.getText();
-        String dataN = "";
+        String dataN = datePickerDataN.getValue().toString();
         String endereco = txtEndereco.getText();
         String telefone = txtTelefone.getText();
         try {
             facadeBackEnd.addNovoUser(login, senha, nome, email, dataN, endereco, telefone);
+            paneLogin.setVisible(true);
+            paneCadastro.setVisible(false);
         } catch (AtributoVazioException ex) {
             System.out.println("Algum campo está vazio!");
         } catch (IOException ex) {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#abrirAmigo" prefHeight="85.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uefs.ecomp.mybook.controller.UserViewRetanguloController">
+   <children>
+      <ImageView fx:id="ImageViewUser" fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblNomeUser" layoutX="54.0" layoutY="6.0" text="Nome do user" />
+      <Label fx:id="lblEmailUser" layoutX="54.0" layoutY="27.0" text="Email" />
+      <Button fx:id="bntSolicitacao" layoutX="150.0" layoutY="51.0" mnemonicParsing="false" onAction="#enviarSolicitacao">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/enviarSolicitacao.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="lblSolicitao" layoutX="52.0" layoutY="63.0" text="Enviar Solicitacao: " />
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</AnchorPane>

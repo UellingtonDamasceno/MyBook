@@ -104,4 +104,12 @@ public class GrafoController {
         }
         throw new EmailOuSenhaInvalidoException();
     }
+
+    public LinkedList getRecomendados() throws HashVaziaException {
+        LinkedList temp = new LinkedList();
+        for(Object vertex : redeSocial.getVertex().toList()){
+            temp.add(((Vertex)vertex).getConteudo());
+        }
+        return temp;
+    }
 }

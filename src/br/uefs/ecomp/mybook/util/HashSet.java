@@ -146,7 +146,9 @@ public class HashSet implements Serializable {
         if (!estaVazio()) {
             LinkedList listaAux = new LinkedList();
             for (Entry atual : chaves) {
-                listaAux.add(atual.getChave());
+                if(atual != null){
+                    listaAux.add(atual.getChave());
+                }
             }
             return listaAux;
         }

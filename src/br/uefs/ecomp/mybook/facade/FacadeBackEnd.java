@@ -106,8 +106,8 @@ public class FacadeBackEnd {
         return user;
     }
 
-    public Iterator getMaisPopulares() {
-        return null;
+    public LinkedList getMaisPopulares() throws HashVaziaException {
+        return controllerGrafo.getRecomendados();
     }
 
     public Iterator listarAmigos(User user) throws HashVaziaException, EntryNaoExisteException {
@@ -215,5 +215,8 @@ public class FacadeBackEnd {
         controllerArquivos.escreveObjeto(destinatario.getCaminhoSolicitacao(), nova.toString(), (Serializable) nova);
         return nova;
     }
-    
+ 
+    public Grafo getRedeSocial(){
+        return controllerGrafo.redeSocial();
+    }
 }
